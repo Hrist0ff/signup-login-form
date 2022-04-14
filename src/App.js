@@ -19,7 +19,7 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="justify-content-end" style={{ width: "100%" }}> 
-              <Nav.Link onClick={() => setLogInShow(true)}>Log in</Nav.Link>
+              <Nav.Link onClick={() => setLogInShow(true)}>Log in </Nav.Link>
               <LoginForm show = {LogInShow} onHide={() => setLogInShow(false)}/>
               <Nav.Link onClick={() => setSignUpShow(true)}>Sign up</Nav.Link>
               <SignupForm show={SignUpShow} onHide={() => setSignUpShow(false)}/>

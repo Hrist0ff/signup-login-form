@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Modal from "react-bootstrap/Modal";
 import { Button, ModalBody, ModalTitle} from 'react-bootstrap';
-import APIService from '../components/apiservice.js';
 
 function LoginForm(props){
     const [password, setPassword] = useState(0);
@@ -9,24 +8,23 @@ function LoginForm(props){
 
     
 
-    const register = () => {
-        console.log(email);
-        console.log(password);
+    const register = () => {   
+
         
-
-        const LogIn = () =>{
-            APIService.LogIn({email,password})
-            .catch(error => console.log('error',error))
+        const requestOptions = {
+            method: 'POST', headers: { 'Content-Type': 'application/json'}, 
+            body: JSON.stringify({email: email, password: password}),
+            mode : 'cors'
+        };
+        console.log(requestOptions);
+        fetch('http://localhost:5000/pythonlogin/', requestOptions)         
+        .then(response => {if(!response.ok) throw new Error(response.status)
+        else{
+            props.onHide();
         }
-
-        const handleSubmit=(event)=>{
-            LogIn();
-            setEmail('')
-            setPassword('')
-            
-        }
-
-        handleSubmit();
+        });
+        fetch('http://localhost:5000/pythonlogin/profile', requestOptions)
+        .then(text => {console.log('The response was....', text);});
 
     }
 
@@ -51,6 +49,7 @@ function LoginForm(props){
                     name='email'
                     className="form-input"
                     placeholder="Enter email"
+                    onChange={e => setEmail(e.target.value)}
                 />
                 <p />
                 <label htmlFor="password" className='form-label'>
@@ -62,13 +61,13 @@ function LoginForm(props){
                     name='password'
                     className="form-input"
                     placeholder="Enter password"
+                    onChange={e => setPassword(e.target.value)}
                 />
             </ModalBody>
             <Modal.Footer>
             <Button className="form-input-btn" type='submit' onClick={() => {
                 props.onHide();
                 register();
-                window.alert("Succesful Login!");
             }}>
                 Confirm
             </Button>

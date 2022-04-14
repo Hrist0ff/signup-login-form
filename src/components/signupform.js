@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
 import Modal from "react-bootstrap/Modal";
 import { Button, ModalBody, ModalTitle} from 'react-bootstrap';
-import APIService from '../components/apiservice.js';
 import '../index.css';
 
 
 function SignupForm(props){
+    const [username, setUsername] = useState(0);
     const [password, setPassword] = useState(0);
     const [email, setEmail] = useState(0);
 
     
     const register = () => {
-        console.log(email);
-        console.log(password);
+        //console.log(email);
+        //console.log(password);
         
 
-        const SignUp = () =>{
-            APIService.SignUp(email,password)
-            .catch(error => console.log('error',error))
+        const requestOptions = {
+            method: 'POST', headers: { 'Content-Type': 'application/json'}, 
+            body: JSON.stringify({username: username ,email: email, password: password}),
+            mode : 'cors'
+        };     
+        console.log(requestOptions);
+        fetch('http://localhost:5000/pythonlogin/register', requestOptions)         
+        .then(response => {if(!response.ok) throw new Error(response.status)
+    
+        else{
+            props.onHide();
         }
-
-        const handleSubmit=(event)=>{
-            SignUp();
-            setEmail('')
-            setPassword('')
-            
-        }
-
-        handleSubmit();
+        });
 
     }
    
@@ -44,6 +44,18 @@ function SignupForm(props){
                 </ModalTitle>
             </Modal.Header>
             <ModalBody className="form-inputs" >
+            <label htmlFor="username" className='form-label'>
+                    Username:    
+                </label>
+                <input
+                    id = 'username'
+                    type='username'
+                    name='username'
+                    className="form-input"
+                    placeholder="Enter username"
+                    onChange={e => setUsername(e.target.value)}
+                />
+                <p />
                 <label htmlFor="email" className='form-label'>
                     Email:    
                 </label>
@@ -70,8 +82,8 @@ function SignupForm(props){
             </ModalBody>
             <Modal.Footer>
             <Button className="form-input-btn" type='submit' onClick={() => {
-                props.onHide();
                 register();
+                props.onHide();
                 window.alert("Succesful Register!");
             }}>
                 Confirm
@@ -80,6 +92,7 @@ function SignupForm(props){
                 <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
+        
     )
 }
 
