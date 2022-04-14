@@ -1,8 +1,8 @@
-# Getting Started with Create React App
+# Simple Registration/Login Form made with React, Flask and MySQL
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is task for Telebid Pro.
 
-## Available Scripts
+## How do i start the project
 
 In the project directory, you can run:
 
