@@ -9,7 +9,8 @@ import SignupForm from './components/signupform.js';
 function App() {
   const [SignUpShow, setSignUpShow] = React.useState(false);
   const [LogInShow, setLogInShow] = React.useState(false);
-  
+
+
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -26,7 +27,7 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <img src="https://telebid-pro.com/wp-content/uploads/2021/08/careers-copy-1.png" alt="Background"/>
+      <img src="https://telebid-pro.com/wp-content/uploads/2021/08/careers-copy-1.png" alt="Background" width = '100%'/>
     </div>
   );
 }

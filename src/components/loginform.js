@@ -14,13 +14,13 @@ function LoginForm(props){
         console.log(password);
         
 
-        const insertAccount = () =>{
-            APIService.InsertAccount({email,password})
+        const LogIn = () =>{
+            APIService.LogIn({email,password})
             .catch(error => console.log('error',error))
         }
 
         const handleSubmit=(event)=>{
-            insertAccount();
+            LogIn();
             setEmail('')
             setPassword('')
             

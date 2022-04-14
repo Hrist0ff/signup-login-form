@@ -15,13 +15,13 @@ function SignupForm(props){
         console.log(password);
         
 
-        const insertAccount = () =>{
-            APIService.InsertAccount({email,password})
+        const SignUp = () =>{
+            APIService.SignUp(email,password)
             .catch(error => console.log('error',error))
         }
 
         const handleSubmit=(event)=>{
-            insertAccount();
+            SignUp();
             setEmail('')
             setPassword('')
             
