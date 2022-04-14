@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Modal from "react-bootstrap/Modal";
 import { Button, ModalBody, ModalTitle} from 'react-bootstrap';
+import '../index.css'
+import pass from '../images/lock-solid.svg'
+import emai from '../images/at-solid.svg'
 
 function LoginForm(props){
     const [password, setPassword] = useState(0);
@@ -18,8 +21,13 @@ function LoginForm(props){
         };
         console.log(requestOptions);
         fetch('http://localhost:5000/pythonlogin/', requestOptions)         
-        .then(response => {if(!response.ok) throw new Error(response.status)
-        else{
+        .then(response => {
+            if(!response.ok) throw new Error(response.status)
+        
+            else{
+            response.text().then(data => {
+                window.alert(data);
+            });
             props.onHide();
         }
         });
@@ -29,7 +37,7 @@ function LoginForm(props){
     return (
         <Modal
             {...props}
-            size="lg"
+            size="m"
             centered
         >
             <Modal.Header closeButton>
@@ -37,39 +45,35 @@ function LoginForm(props){
                     Login
                 </ModalTitle>
             </Modal.Header>
-            <ModalBody className="form-inputs">
-                <label htmlFor="email" className='form-label'>
-                    Email:    
-                </label>
+            <ModalBody className="login">
+                <img src={emai} alt='Email' className='img'></img>
                 <input
                     id = 'email'
                     type='email'
                     name='email'
-                    className="form-input"
+                    className="text-inp"
                     placeholder="Enter email"
                     onChange={e => setEmail(e.target.value)}
                 />
                 <p />
-                <label htmlFor="password" className='form-label'>
-                    Password:   
-                </label>
+                <img src={pass} alt='Password' className='img' ></img>
                 <input
                     id = 'password'
                     type='password'
                     name='password'
-                    className="form-input"
+                    className="text-inp"
                     placeholder="Enter password"
                     onChange={e => setPassword(e.target.value)}
                 />
             </ModalBody>
             <Modal.Footer>
-            <Button className="form-input-btn" type='submit' onClick={() => {
+            <Button variant="success" type='submit' onClick={() => {
                 props.onHide();
                 register();
             }}>
                 Confirm
             </Button>
-                <Button onClick={props.onHide}>Close</Button>
+                <Button variant="danger" onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
     )

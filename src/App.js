@@ -5,7 +5,6 @@ import { Navbar,Nav,Container,NavbarBrand} from 'react-bootstrap';
 import LoginForm from './components/loginform.js';
 import SignupForm from './components/signupform.js';
 
-
 function App() {
   const [SignUpShow, setSignUpShow] = React.useState(false);
   const [LogInShow, setLogInShow] = React.useState(false);
