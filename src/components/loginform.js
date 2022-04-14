@@ -23,8 +23,6 @@ function LoginForm(props){
             props.onHide();
         }
         });
-        fetch('http://localhost:5000/pythonlogin/profile', requestOptions)
-        .then(text => {console.log('The response was....', text);});
 
     }
 

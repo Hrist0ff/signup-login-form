@@ -9,7 +9,6 @@ function SignupForm(props){
     const [password, setPassword] = useState(0);
     const [email, setEmail] = useState(0);
 
-    
     const register = () => {
         //console.log(email);
         //console.log(password);
@@ -22,9 +21,14 @@ function SignupForm(props){
         };     
         console.log(requestOptions);
         fetch('http://localhost:5000/pythonlogin/register', requestOptions)         
-        .then(response => {if(!response.ok) throw new Error(response.status)
+        .then(response => {
+			if(!response.ok) throw new Error(response.status)
     
         else{
+			response.text().then(data => {
+				window.alert(data);
+			// do something with your data
+			});
             props.onHide();
         }
         });
@@ -84,7 +88,6 @@ function SignupForm(props){
             <Button className="form-input-btn" type='submit' onClick={() => {
                 register();
                 props.onHide();
-                window.alert("Succesful Register!");
             }}>
                 Confirm
             </Button>
